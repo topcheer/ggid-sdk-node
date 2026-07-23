@@ -1,5 +1,9 @@
 # GGID Node.js SDK
 
+[![npm version](https://img.shields.io/npm/v/@ggid/sdk.svg)](https://www.npmjs.com/package/@ggid/sdk)
+[![CI](https://github.com/topcheer/ggid-sdk-node/actions/workflows/ci.yml/badge.svg)](https://github.com/topcheer/ggid-sdk-node/actions/workflows/ci.yml)
+[![License: Apache 2.0](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://www.apache.org/licenses/LICENSE-2.0)
+
 A production-ready Node.js/TypeScript client SDK for the [GGID](https://github.com/topcheer/ggid) IAM platform.
 
 ## Installation
@@ -8,6 +12,8 @@ A production-ready Node.js/TypeScript client SDK for the [GGID](https://github.c
 npm install @ggid/sdk
 # or
 yarn add @ggid/sdk
+# or
+pnpm add @ggid/sdk
 ```
 
 ### Peer Dependencies
@@ -182,11 +188,14 @@ try {
 
 | Method | Description |
 |--------|-------------|
-| `login(input)` | Authenticate with username/password |
+| `login(input)` | Authenticate with username/password (OAuth2 password grant) |
+| `clientCredentials(input)` | Machine-to-machine auth (client_credentials grant) |
 | `register(username, email, password)` | Register a new user |
 | `logout(accessToken)` | Invalidate an access token |
-| `refreshToken(refreshToken)` | Refresh an access token |
+| `refreshToken(refreshToken)` | Refresh an access token (family rotation) |
 | `verifyToken(token)` | Verify JWT and return claims |
+| `introspectToken(token)` | Server-side token introspection (RFC 7662) |
+| `exchangeToken(input)` | Token exchange for delegation (RFC 8693) |
 | `createUser(input)` | Create a new user |
 | `getUser(userId)` | Get user by ID |
 | `updateUser(userId, input)` | Update user fields |
@@ -202,4 +211,11 @@ try {
 
 ## License
 
-Apache 2.0
+[Apache 2.0](LICENSE)
+
+## Links
+
+- [GGID Platform](https://github.com/topcheer/ggid)
+- [npm Package](https://www.npmjs.com/package/@ggid/sdk)
+- [Issue Tracker](https://github.com/topcheer/ggid-sdk-node/issues)
+- [Changelog](CHANGELOG.md)
