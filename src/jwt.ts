@@ -34,7 +34,7 @@ export class JWTVerifier {
   private cachedKeys: Map<string, string> = new Map(); // kid -> PEM public key
   private cacheExpiry = 0;
 
-  constructor(config: Pick<GGIDConfig, 'jwksUrl' | 'issuer' | 'gatewayUrl'>) {
+  constructor(config: Partial<Pick<GGIDConfig, 'jwksUrl' | 'issuer' | 'gatewayUrl'>>) {
     // Auto-derive jwksUrl from gatewayUrl if not explicitly provided
     if (config.jwksUrl) {
       this.jwksUrl = config.jwksUrl;
@@ -74,8 +74,9 @@ export class JWTVerifier {
     const parts = token.split('.');
     if (parts.length !== 3) throw new JWTError('invalid token format');
 
+    let header: { kid?: string; alg?: string };
     try {
-      const header = JSON.parse(Buffer.from(parts[0], 'base64url').toString()) as { kid?: string; alg?: string };
+      header = JSON.parse(Buffer.from(parts[0], 'base64url').toString()) as { kid?: string; alg?: string };
       if (header.alg !== 'RS256') throw new JWTError(`unsupported alg: ${header.alg}`);
       if (!header.kid) throw new JWTError('missing kid in token header');
     } catch (e) {
