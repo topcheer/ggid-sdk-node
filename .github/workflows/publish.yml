@@ -38,4 +38,4 @@ jobs:
           fi
 
       - name: Publish to npm (trusted publishing)
-        run: npm publish --provenance --access public
+        run: npm publish --access public
