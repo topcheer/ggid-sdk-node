@@ -17,7 +17,7 @@ describe('GGIDClient', () => {
   it('uses default tenantId when not provided', () => {
     const c = new GGIDClient({ gatewayUrl: 'https://iam.test.com' });
     const cfg = (c as any).config;
-    expect(cfg.tenantId).toBe('00000000-0000-0000-0000-000000000001');
+    expect(cfg.tenantId).toBe('');
   });
 
   it('uses provided tenantId', () => {

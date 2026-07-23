@@ -4,7 +4,7 @@ import '../src/introspect';
 
 describe('JWTVerifier', () => {
   it('throws when jwksUrl not provided', () => {
-    expect(() => new JWTVerifier({} as any)).toThrow('jwksUrl is required');
+    expect(() => new JWTVerifier({} as any)).toThrow('Either jwksUrl or gatewayUrl is required');
   });
 
   it('constructs with valid jwksUrl', () => {

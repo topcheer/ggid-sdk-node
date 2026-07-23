@@ -10,14 +10,21 @@ describe('Auth methods', () => {
     mockRequest = vi.spyOn(client as any, 'request');
   });
 
-  it('login sends POST to /api/v1/auth/login', async () => {
+  it('login sends POST to /oauth/token with password grant', async () => {
     const tokenSet = { access_token: 'tok', token_type: 'Bearer', expires_in: 3600 };
-    mockRequest.mockResolvedValue(tokenSet);
+    vi.stubGlobal('fetch', vi.fn().mockResolvedValue({
+      ok: true,
+      json: () => Promise.resolve(tokenSet),
+    }));
 
     const result = await client.login({ username: 'admin', password: 'pass' });
-    expect(mockRequest).toHaveBeenCalledWith('POST', '/api/v1/auth/login', { username: 'admin', password: 'pass' });
+    expect(fetch).toHaveBeenCalledWith(
+      expect.stringContaining('/api/v1/oauth/token'),
+      expect.objectContaining({ method: 'POST' }),
+    );
     expect(result.access_token).toBe('tok');
     expect(result.expires_in).toBe(3600);
+    vi.unstubAllGlobals();
   });
 
   it('register sends POST with username, email, password', async () => {

@@ -74,9 +74,14 @@ export class JWTVerifier {
     const parts = token.split('.');
     if (parts.length !== 3) throw new JWTError('invalid token format');
 
-    const header = JSON.parse(Buffer.from(parts[0], 'base64url').toString()) as { kid?: string; alg?: string };
-    if (header.alg !== 'RS256') throw new JWTError(`unsupported alg: ${header.alg}`);
-    if (!header.kid) throw new JWTError('missing kid in token header');
+    try {
+      const header = JSON.parse(Buffer.from(parts[0], 'base64url').toString()) as { kid?: string; alg?: string };
+      if (header.alg !== 'RS256') throw new JWTError(`unsupported alg: ${header.alg}`);
+      if (!header.kid) throw new JWTError('missing kid in token header');
+    } catch (e) {
+      if (e instanceof JWTError) throw e;
+      throw new JWTError('invalid token header');
+    }
 
     const pem = await this.getKeyPem(header.kid);
 

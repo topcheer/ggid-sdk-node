@@ -52,11 +52,11 @@ export class GGIDClient {
   constructor(config: GGIDConfig) {
     this.config = {
       gatewayUrl: config.gatewayUrl.replace(/\/$/, ''),
-      tenantId: config.tenantId || '00000000-0000-0000-0000-000000000001',
+      tenantId: config.tenantId || '',
       timeout: config.timeout || 30000,
     };
     this.apiKey = config.apiKey;
-    if (config.jwksUrl || config.gatewayUrl) {
+    if (config.jwksUrl) {
       this.verifier = new JWTVerifier({
         jwksUrl: config.jwksUrl,
         gatewayUrl: config.gatewayUrl?.replace(/\/$/, ''),
