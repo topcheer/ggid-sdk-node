@@ -82,3 +82,10 @@ export {
   bufferToBase64url,
   base64urlToBuffer,
 } from './passkey';
+
+// Webhook signature verification
+export {
+  verifyWebhookSignature,
+  expressWebhook,
+} from './webhook';
+export type { WebhookVerificationResult } from './webhook';
