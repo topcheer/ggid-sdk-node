@@ -1,17 +1,16 @@
 {
   "name": "@ggid/sdk",
-  "version": "1.0.8",
+  "version": "1.0.0",
   "description": "GGID IAM Platform Node.js SDK \u2014 JWT verification, RBAC, user management, OAuth/OIDC, and tenant-aware middleware.",
   "license": "Apache-2.0",
   "author": "GGID Contributors (https://github.com/topcheer/ggid)",
-  "homepage": "https://github.com/topcheer/ggid/tree/main/sdk/node",
+  "homepage": "https://github.com/topcheer/ggid-sdk-node",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/topcheer/ggid.git",
-    "directory": "sdk/node"
+    "url": "git+https://github.com/topcheer/ggid-sdk-node.git"
   },
   "bugs": {
-    "url": "https://github.com/topcheer/ggid/issues"
+    "url": "https://github.com/topcheer/ggid-sdk-node/issues"
   },
   "keywords": [
     "ggid",
